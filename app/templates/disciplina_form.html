@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Disciplina</title>
+</head>
+<body>
+    <h1>Editar Disciplina</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="id_nome">Nome:</label>
+        <input type="text" id="id_nome" name="nome" value="{{ disciplina.nome }}">
+        
+        <!-- Outros campos da disciplina, se houver -->
+        
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
