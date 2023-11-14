@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Horários</title>
+</head>
+<body>
+    <h1>Lista de Horários</h1>
+    <ul>
+        {% for horario in horarios %}
+            <li>{{ horario.dia_da_semana }} {{ horario.hora_de_inicio }} - {{ horario.hora_de_termino }} <a href="editar/{{ horario.pk }}">Editar</a> <a href="{% url 'horario-delete' horario.id %}">Apagar</a></li>
+        {% empty %}
+            <li>Nenhuma horario encontrado.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'horario-create' %}">Cadastrar Novo Horário</a>
+</body>
+</html>

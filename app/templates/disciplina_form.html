@@ -9,8 +9,8 @@
     <form method="post">
         {% csrf_token %}
         
-        <label for="id_nome">Nome:</label>
-        <input type="text" id="id_nome" name="nome" value="{{ disciplina.nome }}">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ disciplina.nome }}">
         
         <!-- Outros campos da disciplina, se houver -->
         

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Professor</title>
+</head>
+<body>
+    <h1>Editar Professor</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="id_professor">Professor:</label>
+        <select id="id_professor" name="professor">
+            {% for choice in form.fields.professor.choices %}
+                <option value="{{ choice.0 }}" {% if choice.0 == professor.professor.pk %}selected{% endif %}>
+                    {{ choice.1 }}
+                </option>
+            {% endfor %}
+        </select>
+        
+        <label for="id_disciplinas_ministradas">Disciplinas Ministradas:</label>
+        <select id="id_disciplinas_ministradas" name="disciplinas_ministradas" multiple>
+            {% for disciplina in form.fields.disciplinas_ministradas.queryset %}
+                <option value="{{ disciplina.id }}" {% if disciplina in form.initial.disciplinas_ministradas.all %}selected{% endif %}>
+                    {{ disciplina.nome }}
+                </option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Horário</title>
+</head>
+<body>
+    <h1>Formulário de Horário</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id_disciplina_associada">Disciplina Associada:</label>
+        <select id="id_disciplina_associada" name="disciplina_associada">
+            {% for disciplina in form.fields.disciplina_associada.queryset %}
+                <option value="{{ disciplina.pk }}" {% if disciplina.pk == form.initial.disciplina_associada.pk %}selected{% endif %}>
+                    {{ disciplina.nome }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="id_dia_da_semana">Dia da Semana:</label>
+        <select id="id_dia_da_semana" name="dia_da_semana">
+            {% for choice in form.fields.dia_da_semana.choices %}
+                <option value="{{ choice.0 }}" {% if choice.0 == form.initial.dia_da_semana %}selected{% endif %}>
+                    {{ choice.1 }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="id_hora_de_inicio">Hora de Início:</label>
+        <input type="time" id="id_hora_de_inicio" name="hora_de_inicio" value="{{ form.initial.hora_de_inicio }}">
+
+        <label for="id_hora_de_termino">Hora de Término:</label>
+        <input type="time" id="id_hora_de_termino" name="hora_de_termino" value="{{ form.initial.hora_de_termino }}">
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

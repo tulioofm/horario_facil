@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Usuários</title>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <ul>
+        {% for usuario in usuarios %}
+            <li>{{ usuario.nome }} - {{ usuario.papel }} <a href="editar/{{ usuario.id }}">Editar</a> <a href="{% url 'usuario-delete' usuario.id %}">Apagar</a></li>
+        {% empty %}
+            <li>Nenhuma usuário encontrada.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'usuario-create' %}">Cadastrar Novo Usuário</a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Usuário</title>
+</head>
+<body>
+    <h1>Editar Usuário</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ usuario.nome }}">
+        
+        <label for="papel">Papel:</label>
+        <select id="papel" name="papel">
+            {% for choice in form.fields.papel.choices %}
+            <option value="{{ choice.0 }}" {% if choice.0 == usuario.papel %}selected{% endif %}>
+                {{ choice.1 }}
+            </option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
