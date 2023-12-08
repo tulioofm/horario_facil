@@ -25,3 +25,6 @@ class horario_form(forms.ModelForm):
     class Meta:
         model = Horario
         fields = '__all__'
+        widgets = {
+            'hora_de_inicio': forms.Select(choices=Horario.HORA_DE_INICIO_CHOICES)
+        }

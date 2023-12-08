@@ -63,16 +63,27 @@ class Horario(models.Model):
         ('Sabado', 'Sábado'),
     )
 
+    HORA_DE_INICIO_CHOICES = (
+        (1, '13:00'),
+        (2, '13:55'),
+        (3, '15:10'),
+        (4, '16:05'),
+        (5, '19:00'),
+        (6, '19:55'),
+        (7, '21:10'),
+        (8, '22:05'),
+    )
+
     disciplina_associada = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     dia_da_semana = models.CharField(max_length=20, choices=DIA_DA_SEMANA_CHOICES)
-    hora_de_inicio = models.TimeField()
-    hora_de_termino = models.TimeField()
+    hora_de_inicio = models.IntegerField(choices=HORA_DE_INICIO_CHOICES)
 
     def __str__(self):
         return f"{self.disciplina_associada} - {self.dia_da_semana}"
+
     class Meta:
-        verbose_name = "Horario"  
-        verbose_name_plural = "Horarios" 
+        verbose_name = "Horario"
+        verbose_name_plural = "Horarios"
 
 
 # Create your models here.

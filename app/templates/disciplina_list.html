@@ -4,15 +4,201 @@
     <title>Lista de Disciplinas</title>
 </head>
 <body>
-    <h1>Lista de Disciplinas</h1>
-    <ul>
-        {% for disciplina in disciplinas %}
-            <li>{{ disciplina.nome }} <a href="editar/{{ disciplina.id }}">Editar</a> <a href="{% url 'disciplina-delete' disciplina.id %}">Apagar</a></li>
-        {% empty %}
-            <li>Nenhuma disciplina encontrada.</li>
-        {% endfor %}
-    </ul>
+    <nav id="menu">
 
-    <a href="{% url 'disciplina-create' %}">Cadastrar Nova Disciplina</a>
+        <ul>
+            <li><a href="{% url 'index' %}">Grade de Horários</a></li>
+            <li><a href="{% url 'horario-list' %}">Horários</a></li>
+            <li><a href="{% url 'disciplina-list' %}">Disciplinas</a></li>
+            <li><a href="{% url 'usuario-list' %}">Usuários</a></li>
+            <li><a href="{% url 'professor-list' %}">Professores</a></li>
+            <li><a href="{% url 'aluno-list' %}">Alunos</a></li>
+        </ul>
+
+    </nav>
+
+    <section id="corpo">
+
+        <a href="{% url 'disciplina-create' %}">Cadastrar Nova Disciplina</a>
+        
+        <h1>Lista de Disciplinas</h1>
+        <ul>
+            {% for disciplina in disciplinas %}
+                <li>{{ disciplina.nome }} <a href="editar/{{ disciplina.id }}">Editar</a> <a href="{% url 'disciplina-delete' disciplina.id %}">Apagar</a></li>
+            {% empty %}
+                <li>Nenhuma disciplina encontrada.</li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+    <style>
+        @charset 'utf-8';
+
+        *
+        {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html
+        {
+            width: 100%;
+            height: 100%;
+        }
+
+        body
+        {
+            display: grid;
+            grid-template-areas: 
+                "menu corpo";
+            grid-template-columns: 20% 80%;
+            width: 100%;
+            height: 100vh;
+            background-color: #EEE;
+            font-family: sans-serif;
+        }
+
+        #menu
+        {
+            grid-area: menu;
+            display: flex;
+            align-items: center;
+            min-width: 250px;
+            background-color: rgb(50, 70, 50);
+            color: white;
+        }
+
+        #menu > ul
+        {
+            flex: 1;
+        }
+
+        #menu li
+        {
+            position: relative;
+        }
+
+        #menu > ul > li
+        {
+            padding: 10px 5px;
+            border-bottom: 1px dotted lightgreen;
+        }
+
+        #menu > ul > li:first-of-type
+        {
+            border-top: 1px dotted lightgreen;
+        }
+
+        #menu li:hover
+        {
+            background-color: lightgreen;
+        }
+
+        #menu li a
+        {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: inherit;
+            color: white;
+        }
+
+        #menu li:hover a
+        {
+            color: rgb(50, 70, 50);
+        }
+
+        #corpo
+        {
+            grid-area: corpo;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100vh;
+            padding: 0 10%;
+        }
+
+        #corpo > a
+        {
+            position: relative;
+            margin-bottom: 25px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: lightgreen;
+            box-shadow: 2px 1px 5px 0 rgba(0,0,0,0.4);       
+            color: rgb(50, 70, 50);     
+            text-align: center;
+        }
+
+        #corpo > a:active
+        {
+            top: 1px;
+            left: 1px;
+            box-shadow: 0 0;
+        }
+
+        h1
+        {
+            padding: 15px;
+            border-radius: 15px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: rgb(50, 70, 50);
+            box-shadow: 2px 1px 5px 0 rgba(0,0,0,0.4);
+            text-align: center;
+            color: white;
+            z-index: -1;
+        }
+
+        #corpo > ul
+        {
+            width: 100%;
+            max-height: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 15px;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            background-color: white;
+            box-shadow: 2px 1px 5px 0 rgba(0,0,0,0.4);
+            text-align: center;
+            overflow: auto;
+            list-style: none;
+        }
+
+        #corpo > ul > li
+        {
+            padding: 10px;
+            border-bottom: 1px dotted gray;
+        }
+        
+        #corpo > ul > li a
+        {
+            position: relative;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: lightgreen;
+            box-shadow: 2px 1px 5px 0 rgba(0,0,0,0.4);       
+            color: rgb(50, 70, 50);     
+        }
+
+        #corpo > ul > li a[href*="deletar"]
+        {
+            background-color: lightcoral;
+            color: darkred;
+        }
+
+        #corpo > ul > li a:active
+        {
+            top: 1px;
+            left: 1px;
+            box-shadow: 0 0;
+        }
+
+    </style>
 </body>
 </html>

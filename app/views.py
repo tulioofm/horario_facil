@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView
+from datetime import datetime, time, timedelta
 from app.models import *
 from app.forms import *
 
@@ -191,11 +192,20 @@ def horario_update(request, horario_id):
     else:
         form = horario_form(instance=horario)  
 
-    return render(request, 'horario_form.html', {'form': form, 'horario': horario})
+    hora_inicial_str = horario.hora_de_inicio
+    hora_inicial = time(*map(int, hora_inicial_str.split(':')))
+
+    return render(request, 'horario_form.html', {'form': form, 'horario': horario, 'hora_inicial': hora_inicial})
 
 def horario_delete(request, horario_id):
     horario = get_object_or_404(horario, pk=horario_id)
     horario.delete()
     return redirect('horario-list')
+
+def index(request):
+    horarios = {
+        'horarios': Horario.objects.all()
+    }
+    return render(request, 'index.html',  horarios)
 
 # Create your views here.

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade de Horários</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <nav id="menu">
+
+        <ul>
+            <li><a href="{% url 'index' %}">Grade de Horários</a></li>
+            <li><a href="{% url 'horario-list' %}">Horários</a></li>
+            <li><a href="{% url 'disciplina-list' %}">Disciplinas</a></li>
+            <li><a href="{% url 'usuario-list' %}">Usuários</a></li>
+            <li><a href="{% url 'professor-list' %}">Professores</a></li>
+            <li><a href="{% url 'aluno-list' %}">Alunos</a></li>
+        </ul>
+
+    </nav>
+
+    <section id="corpo">
+
+        <h1>Grade de Horários</h1>    
+
+        <div id="calendario">
+
+            <div class="cabecalho celula" style="grid-area: hora0;"><span>Hora/Dia</span></div>
+            <div class="cabecalho celula" style="grid-area: Segunda0;"><span>Segunda-Feira</span></div>
+            <div class="cabecalho celula" style="grid-area: Terca0;"><span>Terça-Feira</span></div>
+            <div class="cabecalho celula" style="grid-area: Quarta0;"><span>Quarta-Feira</span></div>
+            <div class="cabecalho celula" style="grid-area: Quinta0;"><span>Quinta-Feira</span></div>
+            <div class="cabecalho celula" style="grid-area: Sexta0;"><span>Sexta-Feira</span></div>
+            <div class="cabecalho celula" style="grid-area: Sabado0;"><span>Sábado</span></div>
+
+            <div class="cabecalho celula" style="grid-area: hora1;"><span>13:00</span></div>
+            <div class="cabecalho celula" style="grid-area: hora2;"><span>13:55</span></div>
+            <div class="intervalo1"></div>
+            <div class="cabecalho celula" style="grid-area: hora3;"><span>15:10</span></div>
+            <div class="cabecalho celula" style="grid-area: hora4;"><span>16:05</span></div>
+            <div class="intervalo2"></div>
+            <div class="cabecalho celula" style="grid-area: hora5;"><span>19:00</span></div>
+            <div class="cabecalho celula" style="grid-area: hora6;"><span>19:55</span></div>
+            <div class="intervalo3"></div>
+            <div class="cabecalho celula" style="grid-area: hora7;"><span>21:10</span></div>
+            <div class="cabecalho celula" style="grid-area: hora8;"><span>22:05</span></div>
+
+            {% for horario in horarios %}
+                <div class="celula" style="grid-area: {{ horario.dia_da_semana }}{{ horario.hora_de_inicio }};"><span>{{ horario.disciplina_associada.nome }}</span></div>
+            {% endfor %}
+        </div>
+        
+    </section>
+
+    <style>
+        @charset 'utf-8';
+
+        *
+        {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html
+        {
+            width: 100%;
+            height: 100%;
+        }
+
+        body
+        {
+            display: grid;
+            grid-template-areas: 
+                "menu corpo";
+            grid-template-columns: 20% 80%;
+            width: 100%;
+            height: 100vh;
+            background-color: #EEE;
+            font-family: sans-serif;
+        }
+
+        #menu
+        {
+            grid-area: menu;
+            display: flex;
+            align-items: center;
+            background-color: rgb(50, 70, 50);
+            color: white;
+        }
+
+        #menu > ul
+        {
+            flex: 1;
+        }
+
+        #menu li
+        {
+            position: relative;
+        }
+
+        #menu > ul > li
+        {
+            padding: 10px 5px;
+            border-bottom: 1px dotted lightgreen;
+        }
+
+        #menu > ul > li:first-of-type
+        {
+            border-top: 1px dotted lightgreen;
+        }
+
+        #menu li:hover
+        {
+            background-color: lightgreen;
+        }
+
+        #menu li a
+        {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: inherit;
+            color: white;
+        }
+
+        #menu li:hover a
+        {
+            color: rgb(50, 70, 50);
+        }
+
+        #corpo
+        {
+            grid-area: corpo;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100vh;
+        }
+
+        h1
+        {
+            margin: 0 10%;
+            padding: 15px;
+            border-radius: 15px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: rgb(50, 70, 50);
+            box-shadow: 2px 1px 5px 0 rgba(0,0,0,0.4);
+            text-align: center;
+            color: white;
+            z-index: -1;
+        }
+
+        #calendario
+        {
+            display: grid;
+            grid-template-areas: 
+                "hora0 Segunda0 Terca0 Quarta0 Quinta0 Sexta0 Sabado0"
+                "hora1 Segunda1 Terca1 Quarta1 Quinta1 Sexta1 Sabado1"
+                "hora2 Segunda2 Terca2 Quarta2 Quinta2 Sexta2 Sabado2"
+                "intervalo1 intervalo1 intervalo1 intervalo1 intervalo1 intervalo1 intervalo1"
+                "hora3 Segunda3 Terca3 Quarta3 Quinta3 Sexta3 Sabado3"
+                "hora4 Segunda4 Terca4 Quarta4 Quinta4 Sexta4 Sabado4"
+                "intervalo2 intervalo2 intervalo2 intervalo2 intervalo2 intervalo2 intervalo2"
+                "hora5 Segunda5 Terca5 Quarta5 Quinta5 Sexta5 Sabado5"
+                "hora6 Segunda6 Terca6 Quarta6 Quinta6 Sexta6 Sabado6"
+                "intervalo3 intervalo3 intervalo3 intervalo3 intervalo3 intervalo3 intervalo3"
+                "hora7 Segunda7 Terca7 Quarta7 Quinta7 Sexta7 Sabado7"
+                "hora8 Segunda8 Terca8 Quarta8 Quinta8 Sexta8 Sabado8";
+            grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 2fr;
+            grid-template-rows: repeat(1fr);
+            width: 80%;
+            min-height: 350px;
+            margin: 0 auto;
+            border-radius: 15px;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            box-shadow: 2px 1px 5px 0 rgba(0,0,0,0.4);
+            background-color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #calendario .cabecalho
+        {
+            background-color: rgb(205, 245, 205);
+            font-weight: 700;
+        }
+
+        #calendario .celula
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            border: 1px dotted lightgreen;
+        }
+
+        #calendario .intervalo1
+        {
+            grid-area: intervalo1;
+            grid-column: 7 span;
+            height: 20px;
+            background-color: #EEE;
+        }
+
+        #calendario .intervalo2
+        {
+            grid-area: intervalo2;
+            grid-column: 7 span;
+            height: 40px;
+            background-color: #DDD;
+        }
+
+        #calendario .intervalo3
+        {
+            grid-area: intervalo3;
+            grid-column: 7 span;
+            height: 20px;
+            background-color: #EEE;
+        }
+    </style>
+</body>
+</html>

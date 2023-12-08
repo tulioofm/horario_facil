@@ -21,7 +21,7 @@ from app.views import *
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('disciplinas/', disciplina_list, name='disciplina-list'),
     path('disciplinas/cadastrar/', disciplina_create, name='disciplina-create'),
